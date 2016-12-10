@@ -1,0 +1,29 @@
+parameters:
+	PrivateModule:
+		AddButtons:
+			## This name must be same as name of injected service in Wunderman\CMS\Carousel for composedPagePresenter (@privateModuleService in this config)
+			carousel:
+				text: 'Add carousel'
+				tooltip: 'If You need to add any carousel you must first create them in the Page parts.'
+
+		PagePartsButtons:
+			':CMSCarousel:Private:List:':
+				text: 'Carousel'
+				icon: 'fa fa-windows'
+
+	renderableComponents:
+		carousel:
+
+services:
+	carouselService:
+	 	class: Wunderman\CMS\Carousel\PrivateModule\Service\CarouselService
+
+	publicCarouselFactory:
+		class: Wunderman\CMS\Carousel\PublicModule\Components\Carousel\Carousel
+		implement: Wunderman\CMS\Carousel\PublicModule\Components\Carousel\ICarouselFactory
+
+	privateCarouselFactory:
+		class: Wunderman\CMS\Carousel\PrivateModule\Components\Carousel\Carousel
+		implement: Wunderman\CMS\Carousel\PrivateModule\Components\Carousel\ICarouselFactory
+
+	- Wunderman\CMS\Carousel\PrivateModule\Model\CarouselModel
